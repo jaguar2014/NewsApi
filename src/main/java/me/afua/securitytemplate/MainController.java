@@ -4,6 +4,7 @@ import me.afua.securitytemplate.models.AppUser;
 import me.afua.securitytemplate.repositories.AppRoleRepository;
 import me.afua.securitytemplate.repositories.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,9 @@ public class MainController {
     @Autowired
     AppRoleRepository roleRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @RequestMapping("/")
     public String showIndex()
@@ -40,11 +44,13 @@ public class MainController {
     @PostMapping("/register")
     public String registerNewUser(@Valid @ModelAttribute("newuser") AppUser user, BindingResult result)
     {
+        String thePassword = user.getPassword();
         if(result.hasErrors())
         {
             return "register";
         }
         user.addRole(roleRepository.findByRole("USER"));
+        user.setPassword(passwordEncoder.encode(thePassword));
         userRepository.save(user);
         return "redirect:/login";
 

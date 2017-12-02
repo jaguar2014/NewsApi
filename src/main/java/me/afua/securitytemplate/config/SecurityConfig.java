@@ -11,11 +11,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Autowired
     AppUserRepository userRepository;
@@ -29,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-                .antMatchers("/","/h2-console/**","/register").permitAll()
+                .antMatchers("/","/register").permitAll()
                 .antMatchers("/granteduser").access("hasAuthority('USER')")
                 .antMatchers("/grantedadmin").access("hasAuthority('ADMIN')")
                 //Indicate all of the permitted routes above, before the line below
@@ -44,8 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure (AuthenticationManagerBuilder auth) throws Exception
     {
-//        auth.inMemoryAuthentication().withUser("user").password("password").authorities("USER")
-//                .and().withUser("admin").password("administrator").authorities("ADMIN");
-        auth.userDetailsService(userDetailsServiceBean());
+        auth.userDetailsService(userDetailsServiceBean()).passwordEncoder(encoder());
     }
 }

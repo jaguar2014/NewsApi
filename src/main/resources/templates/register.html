@@ -9,10 +9,10 @@
     <form th:action="@{/register}" th:object="${newuser}" method="post">
 
         <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br/>
-        <input type="text" placeholder="Enterusername" th:field="*{username}">
+        <input type="text" placeholder="Enter username" th:field="*{username}">
 
         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br/>
-        <input type="password" placeholder="password" th:field="*{password}">
+        <input type="password" placeholder="Enter password" th:field="*{password}">
 
 
         <input type="submit" value="Submit">

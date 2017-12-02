@@ -6,6 +6,7 @@ import me.afua.securitytemplate.repositories.AppRoleRepository;
 import me.afua.securitytemplate.repositories.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,6 +16,9 @@ public class DataLoader implements CommandLineRunner {
 
     @Autowired
     AppRoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... strings) throws Exception {
@@ -39,7 +43,7 @@ public class DataLoader implements CommandLineRunner {
         //Create new users for the database
         System.out.println("Loading users into the application");
         AppUser user = new AppUser();
-        user.setPassword("password");
+        user.setPassword(passwordEncoder.encode("password"));
         user.setUsername("newuser");
         user.addRole(roleRepository.findByRole("ADMIN"));
         user.addRole(roleRepository.findByRole("USER"));
@@ -47,13 +51,13 @@ public class DataLoader implements CommandLineRunner {
 
 
         user = new AppUser();
-        user.setPassword("password");
+        user.setPassword(passwordEncoder.encode("password"));
         user.setUsername("adminuser");
         user.addRole(roleRepository.findByRole("ADMIN"));
         userRepository.save(user);
 
         user = new AppUser();
-        user.setPassword("password");
+        user.setPassword(passwordEncoder.encode("password"));
         user.setUsername("ordinaryuser");
         user.addRole(roleRepository.findByRole("USER"));
         userRepository.save(user);
