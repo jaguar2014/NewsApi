@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -28,10 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-                .anyRequest().authenticated()
-                .antMatchers("/","/h2-console/**").permitAll()
+                .antMatchers("/","/h2-console/**","/register").permitAll()
                 .antMatchers("/granteduser").access("hasAuthority('USER')")
                 .antMatchers("/grantedadmin").access("hasAuthority('ADMIN')")
+                //Indicate all of the permitted routes above, before the line below
+                .anyRequest().authenticated()
 
                 .and()
                 .formLogin()

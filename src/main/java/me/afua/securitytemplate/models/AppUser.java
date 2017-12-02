@@ -1,5 +1,7 @@
 package me.afua.securitytemplate.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,8 +12,10 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotEmpty
     private String username;
 
+    @NotEmpty
     private String password;
 
     @ManyToMany()
