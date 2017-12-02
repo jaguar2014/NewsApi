@@ -56,4 +56,18 @@ public class MainController {
 
     }
 
+    @RequestMapping("/granteduser")
+    public String showUser()
+    {
+        return "userpage";
+    }
+
+    @RequestMapping("/grantedadmin")
+    public void showAdmin()
+    {
+        //You can call methods instead of redirecting
+        showUser();
+    }
+
+
 }

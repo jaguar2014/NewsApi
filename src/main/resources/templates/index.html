@@ -8,10 +8,17 @@
     <div sec:authorize="hasAuthority('USER')">
             Users will see this text.
             You can display a navbar here.
-        </div>
+        <a href="/granteduser">User view of the user page</a>
+    </div>
 
         <div sec:authorize="hasAuthority('ADMIN')">
             Administrators will see this text. You can display a navbar here.
+            <a href="/grantedadmin">Admin view of the user page</a>
         </div>
+
+        <div sec:authorize="Anonymous">
+        <h2>Hello, everyone!</h2>
+        </div>
+
 </body>
 </html>
