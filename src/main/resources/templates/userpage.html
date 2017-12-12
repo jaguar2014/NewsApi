@@ -9,12 +9,12 @@
         <h2>Users can see this</h2>
         Users will see this text.
         You can display a navbar here.
-        </div>
+    </div>
 
         <h2>Everyone who is logged in can see this</h2>
 
     <div sec:authorize="hasAuthority('ADMIN')">
             Administrators will see this text. You can display a navbar here.
-        </div>
+    </div>
 </body>
 </html>

@@ -63,11 +63,10 @@ public class MainController {
     }
 
     @RequestMapping("/grantedadmin")
-    public void showAdmin()
+    public String showAdmin()
     {
         //You can call methods instead of redirecting
-        showUser();
+        System.out.println("Admin...");
+        return showUser();
     }
-
-
 }

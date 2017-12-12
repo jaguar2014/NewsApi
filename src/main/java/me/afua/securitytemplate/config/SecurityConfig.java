@@ -26,7 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AppUserRepository userRepository;
 
-
     @Bean
     public UserDetailsService userDetailsServiceBean() throws Exception {
         return new SSUDS(userRepository);

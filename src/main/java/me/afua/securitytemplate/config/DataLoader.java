@@ -26,10 +26,7 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-
-
         System.out.println("Loading data into the application");
-
 
         System.out.println("Loading roles into the application");
         //Create new roles for the database
@@ -40,7 +37,6 @@ public class DataLoader implements CommandLineRunner {
         aRole = new AppRole();
         aRole.setRole("USER");
         roleRepository.save(aRole);
-
 
         //Create new users for the database
         System.out.println("Loading users into the application");
