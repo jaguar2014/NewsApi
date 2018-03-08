@@ -14,7 +14,13 @@ public class Article {
     private String publishedAt;
 
 
+    public Source getSource() {
+        return source;
+    }
 
+    public void setSource(Source source) {
+        this.source = source;
+    }
 
     public String getAuthor() {
         return author;

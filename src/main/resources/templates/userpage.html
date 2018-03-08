@@ -5,6 +5,14 @@
     <title>Home Page</title>
 </head>
 <body>
+
+
+
+<ul type="none" th:each="newsurl : ${newsurlforprofile}">
+    <li th:text="${newsurl}"></li>
+</ul>
+
+
     <p>users will see news details for each of the profile category selected , basically pass for each category news .. the news selected</p>
 </body>
 </html>

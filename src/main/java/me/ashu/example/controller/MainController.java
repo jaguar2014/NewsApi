@@ -111,7 +111,49 @@ public class MainController {
 
 
     @GetMapping("/newspertopic")
-    public String newsPerTopic(){
+    public String newsPerTopic(Model model, Authentication auth){
+
+        AppUser appUser = userRepository.findByUsername(auth.getName());
+
+        List<Profile> catForUser = profileRepository.findByAppUsersIn(appUser);
+
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        NewsPublishers newsPublishers = restTemplate.getForObject("https://newsapi.org/v2/sources?apiKey=5800ef4eec3e4e33821e6fc80e59e70c", NewsPublishers.class);
+
+        List<Source> sources =  newsPublishers.getSources();
+
+
+       List<Profile> profiles = profileRepository.findAll();
+
+        Set<String> newsUrl = new HashSet<>();
+
+
+        for (Source source :
+                sources) {
+
+            for (Profile profile :
+                    catForUser) {
+
+               if(source.getCategory().equals(profile.getCategory())){
+
+                   System.out.println(source.getCategory());
+
+                   newsUrl.add(source.getUrl());
+
+               }
+
+       }
+
+        }
+
+
+
+
+
+
+        model.addAttribute("newsurlforprofile", newsUrl);
 
 
         return "userpage";
