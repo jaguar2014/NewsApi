@@ -31,7 +31,7 @@
     <tr  th:each="source : ${sourceMacthingProfile}">
 
         <td th:text="${source.category}"></td>
-        <td> <a th:href="${source.url}">Source </a></td>
+        <td th:inline="text"> <a th:href="${source.url}"  target="_blank">[[${source.url}]] </a></td>
 
     </tr>
 
@@ -39,6 +39,5 @@
 </table>
 
 
-    <p>users will see news details for each of the profile category selected , basically pass for each category news .. the news selected</p>
 </body>
 </html>
