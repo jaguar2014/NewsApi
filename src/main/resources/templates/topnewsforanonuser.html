@@ -14,12 +14,29 @@
 <!--</ul>-->
 
 
-<ul type="none" th:each="publishers : ${newsPublishers}">
-    <li th:each="source :${publishers.getSources()}">
 
-        <p th:text="${source.category}"></p>
-    </li>
-</ul>
+
+<table class="table">
+    <thead>
+    <tr>
+
+        <th scope="col">News Title</th>
+        <th scope="col">News Description</th>
+        <th scope="col">News Url</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  th:each="toparticle : ${topheadlines}">
+
+        <td th:text="${toparticle.title}"></td>
+        <td th:text="${toparticle.description}"></td>
+        <td th:inline="text"> <a th:href="${toparticle.url}"  target="_blank">[[${toparticle.url}]] </a></td>
+
+    </tr>
+
+    </tbody>
+</table>
+
 
 </body>
 </html>

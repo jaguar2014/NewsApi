@@ -21,26 +21,10 @@ public class NewsController {
     @GetMapping("/anonuser")
     public  String  showIndex(Model model){
         RestTemplate restTemplate = new RestTemplate();
-        // String sunsign = request.getParameter("sunsign") ;
+
         Topheadline topheadline = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class);
-        model.addAttribute("topheadlines", topheadline);
-      //
-        NewsPublishers newsPublishers = restTemplate.getForObject("https://newsapi.org/v2/sources?apiKey=5800ef4eec3e4e33821e6fc80e59e70c", NewsPublishers.class);
+        model.addAttribute("topheadlines", topheadline.getArticles());
 
-       List<Source> sources =  newsPublishers.getSources();
-
-       Set<String> categories = new HashSet<>();
-
-
-        for (Source source :
-                sources) {
-            categories.add(source.getCategory());
-        }
-
-
-
-
-       model.addAttribute("newsPublishers", newsPublishers.getSources());
 
 
 
