@@ -5,19 +5,32 @@
     <title>Home Page</title>
 </head>
 <body>
+<a href="/anonuser">Click here for top news stories</a>
+<a href="/addtoprofile">Click here to add what interests you</a>
+<a href="/newspertopic">Click here to see news per topic selected in your profile</a>
 
 
 
 
-<!--<ul type="none" th:each="source : ${sourceMacthingProfile}">-->
+<table class="table">
+    <thead>
+    <tr>
 
-    <!--<li th:text="${source.url}"></li>-->
-    <!--&lt;!&ndash;<li th:text="${source.getCategory()}">&ndash;&gt;-->
+        <th scope="col">Category Name</th>
+        <th scope="col">Click here to remove Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  th:each="category : ${catForUser}">
 
-       <!--&lt;!&ndash;<li th:text="${source.url}"></li>&ndash;&gt;-->
+        <td th:text="${category.category}"></td>
+        <td th:inline="text"><a th:inline="text" th:href="@{/removecategory/{id}(id=${category.id})}">[[${category.category}]]</a></td>
 
-    <!--&lt;!&ndash;</li>&ndash;&gt;-->
-<!--</ul>-->
+    </tr>
+
+    </tbody>
+</table>
+
 
 <table class="table">
     <thead>
