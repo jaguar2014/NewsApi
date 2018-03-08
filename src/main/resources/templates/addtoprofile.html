@@ -11,6 +11,9 @@
 <form th:action="@{/addtoprofile}" th:method="post" th:object="${profile}">
     <input type="hidden" th:field="*{id}">
 
+
+   Topic <input type="text" th:field="*{topic}">
+
       <select id="topics" name="category" class="selectpicker">
 
 

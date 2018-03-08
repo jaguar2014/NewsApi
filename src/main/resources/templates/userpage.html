@@ -38,6 +38,8 @@
 
         <th scope="col">Category Selected</th>
         <th scope="col">Url to The news</th>
+        <th scope="col">Detail  of  The news</th>
+
     </tr>
     </thead>
     <tbody>
@@ -45,6 +47,8 @@
 
         <td th:text="${source.category}"></td>
         <td th:inline="text"> <a th:href="${source.url}"  target="_blank">[[${source.url}]] </a></td>
+        <td th:text="${source.description}"></td>
+
 
     </tr>
 

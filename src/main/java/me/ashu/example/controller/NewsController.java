@@ -23,6 +23,9 @@ public class NewsController {
         RestTemplate restTemplate = new RestTemplate();
 
         Topheadline topheadline = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class);
+
+        
+
         model.addAttribute("topheadlines", topheadline.getArticles());
 
 

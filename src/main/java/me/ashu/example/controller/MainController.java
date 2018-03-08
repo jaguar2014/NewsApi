@@ -119,14 +119,23 @@ public class MainController {
         RestTemplate restTemplate = new RestTemplate();
 
         NewsPublishers newsPublishers = restTemplate.getForObject("https://newsapi.org/v2/sources?apiKey=5800ef4eec3e4e33821e6fc80e59e70c", NewsPublishers.class);
+       Topheadline everything  = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?q=java&category=health&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class);
 
         List<Source> sources =  newsPublishers.getSources();
 
+
+
+
         List<Source> sourceMacthingProfile = new ArrayList<>();
 
+        List<Topheadline> topheadlines = new ArrayList<>();
 
 
-
+//        for (Profile profile :
+//                catForUser) {
+//            Topheadline everything  = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?category=health&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class);
+//
+//        }
 
 
         Set<String> newsUrl = new HashSet<>();

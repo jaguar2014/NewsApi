@@ -18,8 +18,18 @@ public class Profile {
 
     private String category;
 
+    private String topic;
 
-   @ManyToMany
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    @ManyToMany
     private List<AppUser> appUsers;
 
    public void addAppUser(AppUser appUser){
