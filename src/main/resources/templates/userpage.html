@@ -8,9 +8,35 @@
 
 
 
-<ul type="none" th:each="newsurl : ${newsurlforprofile}">
-    <li th:text="${newsurl}"></li>
-</ul>
+
+<!--<ul type="none" th:each="source : ${sourceMacthingProfile}">-->
+
+    <!--<li th:text="${source.url}"></li>-->
+    <!--&lt;!&ndash;<li th:text="${source.getCategory()}">&ndash;&gt;-->
+
+       <!--&lt;!&ndash;<li th:text="${source.url}"></li>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+<!--</ul>-->
+
+<table class="table">
+    <thead>
+    <tr>
+
+        <th scope="col">Category Selected</th>
+        <th scope="col">Url to The news</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  th:each="source : ${sourceMacthingProfile}">
+
+        <td th:text="${source.category}"></td>
+        <td> <a th:href="${source.url}">Source </a></td>
+
+    </tr>
+
+    </tbody>
+</table>
 
 
     <p>users will see news details for each of the profile category selected , basically pass for each category news .. the news selected</p>

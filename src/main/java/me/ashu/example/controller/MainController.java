@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -124,8 +125,12 @@ public class MainController {
 
         List<Source> sources =  newsPublishers.getSources();
 
+        List<Source> sourceMacthingProfile = new ArrayList<>();
 
-       List<Profile> profiles = profileRepository.findAll();
+
+
+
+
 
         Set<String> newsUrl = new HashSet<>();
 
@@ -140,6 +145,8 @@ public class MainController {
 
                    System.out.println(source.getCategory());
 
+                   sourceMacthingProfile.add(source);
+
                    newsUrl.add(source.getUrl());
 
                }
@@ -149,11 +156,9 @@ public class MainController {
         }
 
 
-
-
-
-
-        model.addAttribute("newsurlforprofile", newsUrl);
+        model.addAttribute("sourceMacthingProfile", sourceMacthingProfile);
+//        model.addAttribute("categories", catForUser);
+//        model.addAttribute("newsurlforprofile", newsUrl);
 
 
         return "userpage";
