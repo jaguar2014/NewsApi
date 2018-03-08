@@ -30,6 +30,8 @@ public class Profile {
         topicsOfInterest.add(category);
     }
 
+
+
     private  String topic;
 
     public long getId() {

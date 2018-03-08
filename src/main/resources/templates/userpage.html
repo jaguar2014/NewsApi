@@ -5,16 +5,6 @@
     <title>Home Page</title>
 </head>
 <body>
-    <div sec:authorize="hasAuthority('USER')">
-        <h2>Users can see this</h2>
-        Users will see this text.
-        You can display a navbar here.
-    </div>
-
-        <h2>Everyone who is logged in can see this</h2>
-
-    <div sec:authorize="hasAuthority('ADMIN')">
-            Administrators will see this text. You can display a navbar here.
-    </div>
+    <p>users will see news details for each of the profile category selected , basically pass for each category news .. the news selected</p>
 </body>
 </html>

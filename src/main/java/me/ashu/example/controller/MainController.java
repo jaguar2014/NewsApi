@@ -90,4 +90,12 @@ public class MainController {
 
         return "index";
     }
+
+
+    @GetMapping("/newspertopic")
+    public String newsPerTopic(){
+
+
+        return "userpage";
+    }
 }
