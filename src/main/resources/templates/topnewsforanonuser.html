@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<ul type="none" th:each="topnews : ${topnewsforanon}">
+    <li th:text="${topnews.source.name}"></li>
+    <li th:text="${topnews.title}"></li>
+    <li th:text="${topnews.description}"></li>
+    <li th:text="${topnews.urlToImage}"></li>
+
+</ul>
+</body>
+</html>

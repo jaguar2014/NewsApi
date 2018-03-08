@@ -1,4 +1,4 @@
-package me.afua.securitytemplate;
+package me.ashu.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,9 +1,9 @@
-package me.afua.securitytemplate.config;
+package me.ashu.example.config;
 
-import me.afua.securitytemplate.models.AppRole;
-import me.afua.securitytemplate.models.AppUser;
-import me.afua.securitytemplate.repositories.AppRoleRepository;
-import me.afua.securitytemplate.repositories.AppUserRepository;
+import me.ashu.example.models.AppRole;
+import me.ashu.example.models.AppUser;
+import me.ashu.example.repositories.AppRoleRepository;
+import me.ashu.example.repositories.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;

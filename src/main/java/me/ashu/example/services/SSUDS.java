@@ -1,17 +1,13 @@
-package me.afua.securitytemplate.services;
+package me.ashu.example.services;
 
-import me.afua.securitytemplate.models.AppRole;
-import me.afua.securitytemplate.models.AppUser;
-import me.afua.securitytemplate.repositories.AppRoleRepository;
-import me.afua.securitytemplate.repositories.AppUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import me.ashu.example.models.AppRole;
+import me.ashu.example.models.AppUser;
+import me.ashu.example.repositories.AppUserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

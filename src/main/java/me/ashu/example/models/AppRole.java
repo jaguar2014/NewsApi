@@ -1,4 +1,4 @@
-package me.afua.securitytemplate.models;
+package me.ashu.example.models;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

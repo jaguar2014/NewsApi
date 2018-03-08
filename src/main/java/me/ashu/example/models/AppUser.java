@@ -1,4 +1,4 @@
-package me.afua.securitytemplate.models;
+package me.ashu.example.models;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -20,6 +20,18 @@ public class AppUser {
 
     @ManyToMany()
     private Set<AppRole> roles;
+
+
+    @OneToOne
+    private Profile profile;
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 
     public AppUser() {
         this.roles=new HashSet<>();

@@ -1,9 +1,12 @@
-package me.afua.securitytemplate;
+package me.ashu.example.controller;
 
-import me.afua.securitytemplate.models.AppUser;
-import me.afua.securitytemplate.repositories.AppRoleRepository;
-import me.afua.securitytemplate.repositories.AppUserRepository;
+import me.ashu.example.models.AppUser;
+import me.ashu.example.models.Profile;
+import me.ashu.example.models.Source;
+import me.ashu.example.repositories.AppRoleRepository;
+import me.ashu.example.repositories.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -56,17 +61,33 @@ public class MainController {
 
     }
 
-    @RequestMapping("/granteduser")
-    public String showUser()
-    {
-        return "userpage";
+    @GetMapping("/addtopic")
+    public String addtopic(Model model) {
+
+        model.addAttribute("source", new Source());
+
+        return "addtopicform";
     }
 
-    @RequestMapping("/grantedadmin")
-    public String showAdmin()
-    {
-        //You can call methods instead of redirecting
-        System.out.println("Admin...");
-        return showUser();
+
+    @PostMapping("/addtopic")
+    public String addtopic(@Valid Source source ,BindingResult result,Model model, Authentication auth, HttpServletRequest request ){
+
+        if (result.hasErrors()) {
+            return "addtopicform";
+        }
+
+        AppUser appUser = userRepository.findByUsername(auth.getName());
+        String[] topics = request.getParameterValues("topics");
+        Profile profile = new Profile();
+
+        for (String topic :
+                topics) {
+            profile.addTopics(topic);
+        }
+        appUser.setProfile(profile);
+        userRepository.save(appUser);
+
+        return "index";
     }
 }

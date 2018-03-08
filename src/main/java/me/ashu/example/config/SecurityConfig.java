@@ -1,7 +1,7 @@
-package me.afua.securitytemplate.config;
+package me.ashu.example.config;
 
-import me.afua.securitytemplate.repositories.AppUserRepository;
-import me.afua.securitytemplate.services.SSUDS;
+import me.ashu.example.repositories.AppUserRepository;
+import me.ashu.example.services.SSUDS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     {
         //Restricts access to routes
         http.authorizeRequests()
-                .antMatchers("/","/register").permitAll()
+                .antMatchers("/","/register","/anonuser").permitAll()
                 .antMatchers("/granteduser").access("hasAuthority('USER')")
                 .antMatchers("/grantedadmin").access("hasAuthority('ADMIN')")
                 //Indicate all of the permitted routes above, before the line below
