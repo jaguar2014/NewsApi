@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<!--<p>form that displays topics to add that are avilable from the api, the form will submit to /addtopic and will be saved to profile ...so it will be tied to profile object</p>-->
+
+
+<form th:action="@{/addtoprofile}" th:method="post" th:object="${profile}">
+    <input type="hidden" th:field="*{id}">
+
+      <select id="topics" name="category" class="selectpicker">
+
+
+        <option th:each="category :${categories}" th:value="${category}" th:text="${category}" selected="selected"></option>
+
+        <input type="Submit" value="Save Interest">
+    </select>
+    
+</form>
+
+</body>
+</html>

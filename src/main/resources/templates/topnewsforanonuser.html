@@ -6,12 +6,20 @@
 </head>
 <body>
 
-<ul type="none" th:each="topnews : ${topnewsforanon}">
-    <li th:text="${topnews.source.name}"></li>
-    <li th:text="${topnews.title}"></li>
-    <li th:text="${topnews.description}"></li>
-    <li th:text="${topnews.urlToImage}"></li>
+<!--<ul type="none" th:each="topheadline : ${topheadlines}">-->
+ <!--<li th:each="article :${topheadline.getArticles()}">-->
+     <!--<p th:text="${article.title}"></p>-->
 
+ <!--</li>-->
+<!--</ul>-->
+
+
+<ul type="none" th:each="publishers : ${newsPublishers}">
+    <li th:each="source :${publishers.getSources()}">
+
+        <p th:text="${source.category}"></p>
+    </li>
 </ul>
+
 </body>
 </html>

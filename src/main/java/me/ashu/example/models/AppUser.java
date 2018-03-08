@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,19 +23,20 @@ public class AppUser {
     private Set<AppRole> roles;
 
 
-    @OneToOne
-    private Profile profile;
+    @ManyToMany(mappedBy = "appUsers")
+    private Set<Profile> profiles;
 
-    public Profile getProfile() {
-        return profile;
+    public Set<Profile> getProfiles() {
+        return profiles;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setProfiles(Set<Profile> profiles) {
+        this.profiles = profiles;
     }
 
     public AppUser() {
         this.roles=new HashSet<>();
+        this.profiles = new HashSet<>();
     }
 
     public long getId() {

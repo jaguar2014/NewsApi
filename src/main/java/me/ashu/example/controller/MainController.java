@@ -1,10 +1,9 @@
 package me.ashu.example.controller;
 
-import me.ashu.example.models.AppUser;
-import me.ashu.example.models.Profile;
-import me.ashu.example.models.Source;
+import me.ashu.example.models.*;
 import me.ashu.example.repositories.AppRoleRepository;
 import me.ashu.example.repositories.AppUserRepository;
+import me.ashu.example.repositories.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,10 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class MainController {
@@ -28,6 +30,9 @@ public class MainController {
 
     @Autowired
     AppRoleRepository roleRepository;
+
+    @Autowired
+    ProfileRepository profileRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -61,32 +66,45 @@ public class MainController {
 
     }
 
-    @GetMapping("/addtopic")
+    @GetMapping("/addtoprofile")
     public String addtopic(Model model) {
 
-        model.addAttribute("source", new Source());
+        RestTemplate restTemplate = new RestTemplate();
 
-        return "addtopicform";
+        NewsPublishers newsPublishers = restTemplate.getForObject("https://newsapi.org/v2/sources?apiKey=5800ef4eec3e4e33821e6fc80e59e70c", NewsPublishers.class);
+
+        List<Source> sources =  newsPublishers.getSources();
+
+        Set<String> categories = new HashSet<>();
+
+
+        for (Source source :
+                sources) {
+            categories.add(source.getCategory());
+        }
+
+
+        model.addAttribute("categories", categories);
+
+
+        model.addAttribute("profile", new Profile());
+
+        return "addtoprofile";
     }
 
 
-    @PostMapping("/addtopic")
-    public String addtopic(@Valid Source source ,BindingResult result,Model model, Authentication auth, HttpServletRequest request ){
+    @PostMapping("/addtoprofile")
+    public String addtopic(@Valid Profile profile, BindingResult result, Model model, Authentication auth, HttpServletRequest request ){
 
         if (result.hasErrors()) {
-            return "addtopicform";
+            return "addtoprofile";
         }
 
         AppUser appUser = userRepository.findByUsername(auth.getName());
-        String[] topics = request.getParameterValues("topics");
-        Profile profile = new Profile();
+        profile.addAppUser(appUser);
+        profileRepository.save(profile);
 
-        for (String topic :
-                topics) {
-            profile.addTopics(topic);
-        }
-        appUser.setProfile(profile);
-        userRepository.save(appUser);
+
 
         return "index";
     }

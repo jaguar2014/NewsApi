@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //Restricts access to routes
         http.authorizeRequests()
                 .antMatchers("/","/register","/anonuser").permitAll()
-                .antMatchers("/granteduser").access("hasAuthority('USER')")
+                .antMatchers("/granteduser","/addtoprofile").access("hasAuthority('USER')")
                 .antMatchers("/grantedadmin").access("hasAuthority('ADMIN')")
                 //Indicate all of the permitted routes above, before the line below
                 .anyRequest().authenticated()
@@ -45,6 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
     @Override
@@ -52,5 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     {
         //Allows database authentication
         auth.userDetailsService(userDetailsServiceBean()).passwordEncoder(encoder());
+
+
     }
 }

@@ -1,12 +1,10 @@
 package me.ashu.example.models;
 
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,21 +16,29 @@ public class Profile {
     private long id;
 
 
-    @NotEmpty
-    private List<String> topicsOfInterest;
+    private String category;
 
 
-    public Profile(){
-        topicsOfInterest = new ArrayList<>();
+   @ManyToMany
+    private List<AppUser> appUsers;
+
+   public void addAppUser(AppUser appUser){
+
+       appUsers.add(appUser);
+
+   }
+
+   public Profile(){
+       appUsers = new ArrayList<>();
+   }
+
+    public List<AppUser> getAppUsers() {
+        return appUsers;
     }
 
-    public void addTopics (String category){
-        topicsOfInterest.add(category);
+    public void setAppUsers(List<AppUser> appUsers) {
+        this.appUsers = appUsers;
     }
-
-
-
-    private  String topic;
 
     public long getId() {
         return id;
@@ -42,19 +48,11 @@ public class Profile {
         this.id = id;
     }
 
-    public List<String> getTopicsOfInterest() {
-        return topicsOfInterest;
+    public String getCategory() {
+        return category;
     }
 
-    public void setTopicsOfInterest(List<String> topicsOfInterest) {
-        this.topicsOfInterest = topicsOfInterest;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
