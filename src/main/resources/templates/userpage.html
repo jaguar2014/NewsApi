@@ -29,7 +29,7 @@
 
 <table class="table">
     <thead>
-    <tr>
+    <tr th:if="${!catForUser.isEmpty()}">
 
         <th scope="col">Category Name</th>
         <th scope="col">Click here to remove Category</th>
@@ -49,7 +49,7 @@
 <!--category detail-->
 <table class="table">
     <thead>
-    <tr>
+    <tr th:if="${!sourceMacthingProfile.isEmpty()}">
 
         <th scope="col">Category Selected</th>
         <th scope="col">Url to The news</th>
@@ -75,7 +75,7 @@
 
 <table class="table">
     <thead>
-    <tr>
+    <tr th:if="${!topheadlines.isEmpty()}">
 
         <th scope="col">Topic Selected</th>
         <th scope="col">Url to The news</th>
