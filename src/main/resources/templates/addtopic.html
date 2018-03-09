@@ -12,16 +12,11 @@
     <input type="hidden" th:field="*{id}">
 
 
+    Topic <input type="text" th:field="*{topic}">
 
 
-      <select id="topics" name="category" class="selectpicker">
 
-
-        <option th:each="category :${categories}" th:value="${category}" th:text="${category}" selected="selected"></option>
-
-        <input type="Submit" value="Save Interest">
-    </select>
-    
+    <input type="Submit" value="Save Interest">
 </form>
 
 </body>

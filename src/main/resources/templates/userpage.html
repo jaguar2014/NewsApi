@@ -6,11 +6,12 @@
 </head>
 <body>
 <a href="/anonuser">Click here for top news stories</a>
-<a href="/addtoprofile">Click here to add what interests you</a>
+<a href="/addtoprofile">Click here to add categories interests you</a>
+<a href="/addtopic">Click here to add topics interests you</a>
 <a href="/newspertopic">Click here to see news per topic selected in your profile</a>
 
 
-
+ <!--list of categorires and delete link-->
 
 <table class="table">
     <thead>
@@ -23,15 +24,15 @@
     <tbody>
     <tr  th:each="category : ${catForUser}">
 
-        <td th:text="${category.category}"></td>
-        <td th:inline="text"><a th:inline="text" th:href="@{/removecategory/{id}(id=${category.id})}">[[${category.category}]]</a></td>
+        <td  th:if="${category.category !=null}" th:text="${category.category}"></td>
+        <td th:if="${category.category !=null}" th:inline="text"><a th:inline="text" th:href="@{/removecategory/{id}(id=${category.id})}">[[${category.category}]]</a></td>
 
     </tr>
 
     </tbody>
 </table>
 
-
+<!--category detail-->
 <table class="table">
     <thead>
     <tr>
@@ -56,5 +57,31 @@
 </table>
 
 
+<!--news based on the topics selected-->
+
+<table class="table">
+    <thead>
+    <tr>
+
+        <th scope="col">Topic Selected</th>
+        <th scope="col">Url to The news</th>
+        <th scope="col">Detail  of  The news</th>
+
+    </tr>
+    </thead>
+    <tbody th:each="topheadline : ${topheadlines}">
+    <tr  th:each="article: ${topheadline.getArticles()}">
+
+            <td th:text="${article.title}"></td>
+            <td th:text="${article.url}"></td>
+            <td th:text="${article.description}"></td>
+
+
+
+
+    </tr>
+
+    </tbody>
+</table>
 </body>
 </html>

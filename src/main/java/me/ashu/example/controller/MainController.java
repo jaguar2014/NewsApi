@@ -65,7 +65,7 @@ public class MainController {
     }
 
     @GetMapping("/addtoprofile")
-    public String addtopic(Model model) {
+    public String addCategory(Model model) {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -78,7 +78,9 @@ public class MainController {
 
         for (Source source :
                 sources) {
-            categories.add(source.getCategory());
+            if(source.getCategory()!=null) {
+                categories.add(source.getCategory());
+            }
         }
 
 
@@ -91,8 +93,10 @@ public class MainController {
     }
 
 
+
+
     @PostMapping("/addtoprofile")
-    public String addtopic(@Valid Profile profile, BindingResult result, Model model, Authentication auth, HttpServletRequest request ){
+    public String addcategory(@Valid Profile profile, BindingResult result, Model model, Authentication auth, HttpServletRequest request ){
 
         if (result.hasErrors()) {
             return "addtoprofile";
@@ -108,8 +112,65 @@ public class MainController {
     }
 
 
+    @GetMapping("/addtopic")
+    public String addtopic(Model model) {
+
+//        RestTemplate restTemplate = new RestTemplate();
+//
+//        NewsPublishers newsPublishers = restTemplate.getForObject("https://newsapi.org/v2/sources?apiKey=5800ef4eec3e4e33821e6fc80e59e70c", NewsPublishers.class);
+//
+//        List<Source> sources =  newsPublishers.getSources();
+//
+//        Set<String> categories = new HashSet<>();
+//
+//
+//        for (Source source :
+//                sources) {
+//            categories.add(source.getCategory());
+//        }
+
+
+     //   model.addAttribute("categories", categories);
+
+
+        model.addAttribute("profile", new Profile());
+
+        return "addtopic";
+    }
+
+    @PostMapping("/addtopic")
+    public String addtopic(@Valid Profile profile, BindingResult result, Model model, Authentication auth, HttpServletRequest request ){
+
+        if (result.hasErrors()) {
+            return "addtopic";
+        }
+
+
+
+
+
+        AppUser appUser = userRepository.findByUsername(auth.getName());
+        profile.addAppUser(appUser);
+        profileRepository.save(profile);
+
+
+
+
+
+        return "userpage";
+    }
+
+
+
+
+
     @GetMapping("/newspertopic")
     public String newsPerTopic(Model model, Authentication auth){
+
+
+
+
+
 
         AppUser appUser = userRepository.findByUsername(auth.getName());
 
@@ -128,7 +189,7 @@ public class MainController {
 
         List<Source> sourceMacthingProfile = new ArrayList<>();
 
-        List<Topheadline> topheadlines = new ArrayList<>();
+
 
 
 //        for (Profile profile :
@@ -167,6 +228,36 @@ public class MainController {
         model.addAttribute("sourceMacthingProfile", sourceMacthingProfile);
 //        model.addAttribute("categories", catForUser);
 //        model.addAttribute("newsurlforprofile", newsUrl);
+
+
+        Set<String> topics = new HashSet<>();
+
+        List<Article> articles = new ArrayList<>();
+
+        List<Profile> profiles = profileRepository.findByAppUsersIn(appUser);
+
+        for (Profile p :
+                profiles) {
+            System.out.println(p.getTopic());
+            topics.add(p.getTopic());
+        }
+
+
+        Topheadline topheadline;
+       restTemplate = new RestTemplate();
+
+        List<Topheadline> topheadlines = new ArrayList<>(); //hold collection of headlines
+
+
+        for (String topic :
+                topics) {
+            topheadlines.add(restTemplate.getForObject("https://newsapi.org/v2/top-headlines?q="+topic+"&country=us&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class));
+        }
+
+
+
+
+        model.addAttribute("topheadlines", topheadlines);
 
 
         return "userpage";
