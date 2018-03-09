@@ -353,7 +353,7 @@ public class MainController {
         model.addAttribute("topheadlines", topheadlines);
 
 
-        return "userpage";
+        return "newspertopic";
     }
 
 

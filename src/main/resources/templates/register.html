@@ -1,22 +1,92 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Register User</title>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Grayscale - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
-    <h1>Register a user</h1>
-    <form th:action="@{/register}" th:object="${newuser}" method="post">
+    <!--<h1>Register a user</h1>-->
+    <!--<form th:action="@{/register}" th:object="${newuser}" method="post">-->
 
-        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br/>
-        <input type="text" placeholder="Enter username" th:field="*{username}">
+        <!--<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br/>-->
+        <!--<input type="text" placeholder="Enter username" th:field="*{username}">-->
 
-        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br/>
-        <input type="password" placeholder="Enter password" th:field="*{password}">
+        <!--<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br/>-->
+        <!--<input type="password" placeholder="Enter password" th:field="*{password}">-->
 
 
-        <input type="submit" value="Submit">
+        <!--<input type="submit" value="Submit">-->
 
-    </form>
+    <!--</form>-->
+
+
+    <div class="container  .center_div">
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-7">
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+                        <form th:action="@{/register}" th:object="${newuser}" method="post">
+
+                        <div class="form-group">
+                                <label for="username" class="col-sm-3 control-label">Username</label>
+                                <div class="col-sm-9">
+                                    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                                    <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Username" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
+                                <div class="col-sm-9">
+                                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                                    <input type="password" th:field="*{password}" class="form-control" id="inputPassword3" placeholder="Password" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group last">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-success btn-sm">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/grayscale.min.js"></script>
 </body>
 </html>

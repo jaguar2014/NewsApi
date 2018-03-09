@@ -24,7 +24,7 @@
 <body>
 <div th:replace="base::nav"></div>
 <!--<p>form that displays topics to add that are avilable from the api, the form will submit to /addtopic and will be saved to profile ...so it will be tied to profile object</p>-->
-
+<div class="container .center_div">
 
 <form th:action="@{/addtoprofile}" th:method="post" th:object="${profile}">
     <input type="hidden" th:field="*{id}">
@@ -41,6 +41,9 @@
     </select>
     
 </form>
+
+
+</div>
 
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

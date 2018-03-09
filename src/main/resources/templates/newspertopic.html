@@ -27,57 +27,77 @@
 <div class="container">
     <!--list of categorires and delete link-->
 
+    <!--<table class="table">-->
+    <!--<thead>-->
+    <!--<tr th:if="${!catForUser.isEmpty()}">-->
 
+    <!--<th scope="col">Category Name</th>-->
+    <!--<th scope="col">Click here to remove Category</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr  th:each="category : ${catForUser}">-->
 
-    <table class="table">
-        <thead>
-        <tr th:if="${!catForUser.isEmpty()}">
+    <!--<td  th:if="${category.category !=null}" th:text="${category.category}"></td>-->
+    <!--<td th:if="${category.category !=null}" th:inline="text"><a th:inline="text" th:href="@{/removecategory/{id}(id=${category.id})}">[[${category.category}]]</a></td>-->
 
-            <th scope="col">Category Name</th>
-            <th scope="col">Click here to remove Category</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr  th:each="category : ${catForUser}">
+    <!--</tr>-->
 
-            <td  th:if="${category.category !=null}" th:text="${category.category}"></td>
-            <td th:if="${category.category !=null}" th:inline="text"><a th:inline="text" th:href="@{/removecategory/{id}(id=${category.id})}">[[${category.category}]]</a></td>
-
-        </tr>
-
-        </tbody>
-    </table>
-
-  <div class="row">
+    <!--</tbody>-->
+    <!--</table>-->
 
     <!--category detail-->
+    <!--<table class="table">-->
+    <!--<thead>-->
+    <!--<tr th:if="${!sourceMacthingProfile.isEmpty()}">-->
+
+    <!--<th scope="col">Category Selected</th>-->
+    <!--<th scope="col">Url to The news</th>-->
+    <!--<th scope="col">Detail  of  The news</th>-->
+
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr  th:each="source : ${sourceMacthingProfile}">-->
+
+    <!--<td th:text="${source.category}"></td>-->
+    <!--<td th:inline="text"> <a th:href="${source.url}"  target="_blank">[[${source.url}]] </a></td>-->
+    <!--<td th:text="${source.description}"></td>-->
+
+
+    <!--</tr>-->
+
+    <!--</tbody>-->
+    <!--</table>-->
+
+
+    <!--news based on the topics selected-->
+
     <table class="table">
         <thead>
-        <tr th:if="${!sourceMacthingProfile.isEmpty()}">
+        <tr th:if="${!topheadlines.isEmpty()}">
 
-            <th scope="col">Category Selected</th>
+            <th scope="col">Topic Selected</th>
             <th scope="col">Url to The news</th>
             <th scope="col">Detail  of  The news</th>
 
         </tr>
         </thead>
-        <tbody>
-        <tr  th:each="source : ${sourceMacthingProfile}">
+        <tbody th:each="topheadline : ${topheadlines}">
+        <tr  th:each="article: ${topheadline.getArticles()}">
 
-            <td th:text="${source.category}"></td>
-            <td th:inline="text"> <a th:href="${source.url}"  target="_blank">[[${source.url}]] </a></td>
-            <td th:text="${source.description}"></td>
+            <td th:text="${article.title}"></td>
+            <td th:inline="text"> <a th:href="${article.url}"  target="_blank">[[${article.url}]] </a></td>
+
+            <td th:text="${article.description}"></td>
+
+
 
 
         </tr>
 
         </tbody>
     </table>
-
-  </div>
-    <!--news based on the topics selected-->
-
-
 </div>
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
