@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<nav  th:fragment="nav" class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="/">Ashu's News</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="/anonuser">top news stories</a>
+                </li>
+                <li sec:authorize="isAuthenticated()"  class="nav-item">
+                    <a class="nav-link js-scroll-trigger"  href="/addtoprofile">Click here to add categories interests you</a>
+                </li>
+                <li  sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link js-scroll-trigger"   href="/addtopic">Click here to add topics interests you</a>
+                </li>
+                <li  sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="/newspertopic">Click here to see news per topic selected in your profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger"href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="/logout">logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

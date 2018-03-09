@@ -39,7 +39,7 @@ public class MainController {
     @RequestMapping("/")
     public String showIndex()
     {
-        return "index";
+        return "landing";
     }
 
     @GetMapping("/register")
@@ -251,7 +251,7 @@ public class MainController {
 
         for (String topic :
                 topics) {
-            topheadlines.add(restTemplate.getForObject("https://newsapi.org/v2/top-headlines?q="+topic+"&country=us&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class));
+            topheadlines.add(restTemplate.getForObject("https://newsapi.org/v2/top-headlines?q="+topic+"&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class));
         }
 
 
