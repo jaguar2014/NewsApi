@@ -149,7 +149,6 @@ public class MainController {
         RestTemplate restTemplate = new RestTemplate();
 
         NewsPublishers newsPublishers = restTemplate.getForObject("https://newsapi.org/v2/sources?apiKey=5800ef4eec3e4e33821e6fc80e59e70c", NewsPublishers.class);
-        Topheadline everything  = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?q=java&category=health&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class);
 
         List<Source> sources =  newsPublishers.getSources();
 
@@ -158,14 +157,6 @@ public class MainController {
 
         List<Source> sourceMacthingProfile = new ArrayList<>();
 
-
-
-
-//        for (Profile profile :
-//                catForUser) {
-//            Topheadline everything  = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?category=health&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class);
-//
-//        }
 
 
         Set<String> newsUrl = new HashSet<>();
@@ -208,47 +199,22 @@ public class MainController {
     @GetMapping("/addtopic")
     public String addtopic(Model model) {
 
-//        RestTemplate restTemplate = new RestTemplate();
-//
-//        NewsPublishers newsPublishers = restTemplate.getForObject("https://newsapi.org/v2/sources?apiKey=5800ef4eec3e4e33821e6fc80e59e70c", NewsPublishers.class);
-//
-//        List<Source> sources =  newsPublishers.getSources();
-//
-//        Set<String> categories = new HashSet<>();
-//
-//
-//        for (Source source :
-//                sources) {
-//            categories.add(source.getCategory());
-//        }
-
-
-     //   model.addAttribute("categories", categories);
-
-
         model.addAttribute("profile", new Profile());
 
         return "addtopic";
     }
 
     @PostMapping("/addtopic")
-    public String addtopic(@Valid Profile profile, BindingResult result, Model model, Authentication auth, HttpServletRequest request ){
+    public String addtopic(@Valid Profile profile, BindingResult result, Authentication auth){
 
         if (result.hasErrors()) {
             return "addtopic";
         }
 
 
-
-
-
         AppUser appUser = userRepository.findByUsername(auth.getName());
         profile.addAppUser(appUser);
         profileRepository.save(profile);
-
-
-
-
 
         return "redirect:/newspertopic";
     }
@@ -273,23 +239,10 @@ public class MainController {
         RestTemplate restTemplate = new RestTemplate();
 
         NewsPublishers newsPublishers = restTemplate.getForObject("https://newsapi.org/v2/sources?apiKey=5800ef4eec3e4e33821e6fc80e59e70c", NewsPublishers.class);
-       Topheadline everything  = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?q=java&category=health&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class);
 
         List<Source> sources =  newsPublishers.getSources();
 
-
-
-
         List<Source> sourceMacthingProfile = new ArrayList<>();
-
-
-
-
-//        for (Profile profile :
-//                catForUser) {
-//            Topheadline everything  = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?category=health&apiKey=5800ef4eec3e4e33821e6fc80e59e70c", Topheadline.class);
-//
-//        }
 
 
         Set<String> newsUrl = new HashSet<>();
@@ -319,13 +272,11 @@ public class MainController {
         model.addAttribute("catForUser", catForUser);
 
         model.addAttribute("sourceMacthingProfile", sourceMacthingProfile);
-//        model.addAttribute("categories", catForUser);
-//        model.addAttribute("newsurlforprofile", newsUrl);
 
 
         Set<String> topics = new HashSet<>();
 
-        List<Article> articles = new ArrayList<>();
+
 
         List<Profile> profiles = profileRepository.findByAppUsersIn(appUser);
 
