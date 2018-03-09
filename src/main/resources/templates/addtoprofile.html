@@ -31,15 +31,20 @@
 
 
 
-
+<div class="row">
       <select class="form-control" id="topics" name="category" class="selectpicker">
 
 
-        <option th:each="category :${categories}" th:value="${category}" th:text="${category}" selected="selected"></option>
+        <option th:each="category :${categories}" th:value="${category}" th:text="${category}" selected="selected">
 
-        <input class="form-control primary" type="Submit" value="Save Interest">
-    </select>
-    
+        </option>
+      </select>
+
+</div>
+
+    <div class="row">
+    <input class="form-control primary" type="Submit" value="Save Interest">
+    </div>
 </form>
 
 

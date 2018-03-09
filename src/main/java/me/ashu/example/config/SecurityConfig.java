@@ -38,14 +38,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/","/register","/anonuser","/css/**","/img/**","/js/**","/scss/**","/vendor/**").permitAll()
                 .antMatchers("/granteduser","/addtoprofile").access("hasAuthority('USER')")
-                .antMatchers("/grantedadmin").access("hasAuthority('ADMIN')")
+
                 //Indicate all of the permitted routes above, before the line below
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().defaultSuccessUrl("/newspertopic")
             .loginPage("/login").permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll();
 
         http.csrf().disable();
         http.headers().frameOptions().disable();

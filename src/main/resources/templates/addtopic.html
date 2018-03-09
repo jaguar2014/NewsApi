@@ -30,12 +30,14 @@
 <form class="form-group" th:action="@{/addtoprofile}" th:method="post" th:object="${profile}">
     <input type="hidden" th:field="*{id}">
 
-
+<div class="row">
     Topic <input class="form-control" type="text" th:field="*{topic}">
+</div>
 
 
-
+<div class="row">
     <input class="form-control" type="Submit" value="Save Interest">
+</div>
 </form>
 </div>
 <script src="vendor/jquery/jquery.min.js"></script>
