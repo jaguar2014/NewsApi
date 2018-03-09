@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Grayscale - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div th:replace="base::nav"></div>
+
+<div class="container">
+    <!--list of categorires and delete link-->
+
+    <table class="table">
+        <thead>
+        <tr th:if="${!catForUser.isEmpty()}">
+
+            <th scope="col">Category Name</th>
+            <th scope="col">Click here to remove Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="category : ${catForUser}">
+
+            <td  th:if="${category.category !=null}" th:text="${category.category}"></td>
+            <td th:if="${category.category !=null}" th:inline="text"><a th:inline="text" th:href="@{/removecategory/{id}(id=${category.id})}">[[${category.category}]]</a></td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+    <!--category detail-->
+    <table class="table">
+        <thead>
+        <tr th:if="${!sourceMacthingProfile.isEmpty()}">
+
+            <th scope="col">Category Selected</th>
+            <th scope="col">Url to The news</th>
+            <th scope="col">Detail  of  The news</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="source : ${sourceMacthingProfile}">
+
+            <td th:text="${source.category}"></td>
+            <td th:inline="text"> <a th:href="${source.url}"  target="_blank">[[${source.url}]] </a></td>
+            <td th:text="${source.description}"></td>
+
+
+        </tr>
+
+        </tbody>
+    </table>
+
+
+    <!--news based on the topics selected-->
+
+
+</div>
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+<!-- Custom scripts for this template -->
+<script src="js/grayscale.min.js"></script>
+</body>
+</html>
